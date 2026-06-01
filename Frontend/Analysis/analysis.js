@@ -158,23 +158,27 @@ async function useCurrentLocation() {
       const lon = position.coords.longitude;
 
       try {
-        const apiKey = "YOUR_OPENWEATHER_API_KEY";
-
-        const response = await fetch(
-          `https://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=1&appid=${apiKey}`,
-        );
+        const response = await fetch("http://127.0.0.1:5000/reverse-geocode", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            latitude: lat,
+            longitude: lon,
+          }),
+        });
 
         const data = await response.json();
 
-        const locationData = data[0];
+        if (!data.success) {
+          alert("Unable to detect location.");
+          return;
+        }
 
-        const city = locationData.name || "";
-        const state = locationData.state || "";
-        const country = locationData.country || "";
-
-        document.getElementById("city").value = city;
-        document.getElementById("state").value = state;
-        document.getElementById("country").value = country;
+        document.getElementById("city").value = data.city;
+        document.getElementById("state").value = data.state;
+        document.getElementById("country").value = data.country;
 
         getWeatherData();
       } catch (error) {

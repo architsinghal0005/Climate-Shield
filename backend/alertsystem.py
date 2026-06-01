@@ -518,6 +518,54 @@ def weather_analysis():
 
         })
 
+@app.route("/reverse-geocode", methods=["POST"])
+def reverse_geocode():
+
+    try:
+        data = request.get_json()
+
+        latitude = data.get("latitude")
+        longitude = data.get("longitude")
+
+        api_key = os.environ.get("OPENWEATHER_API_KEY")
+
+        url = "https://api.openweathermap.org/geo/1.0/reverse"
+
+        response = requests.get(
+            url,
+            params={
+                "lat": latitude,
+                "lon": longitude,
+                "limit": 1,
+                "appid": api_key
+            },
+            timeout=20
+        )
+
+        result = response.json()
+
+        if not result:
+            return jsonify({
+                "success": False,
+                "message": "Location not found."
+            })
+
+        location = result[0]
+
+        return jsonify({
+            "success": True,
+            "city": location.get("name", ""),
+            "state": location.get("state", ""),
+            "country": location.get("country", "")
+        })
+
+    except Exception as e:
+        print(str(e))
+
+        return jsonify({
+            "success": False,
+            "message": "Reverse geocoding failed."
+        })
 # =========================================================
 # CHATBOT API
 # =========================================================
