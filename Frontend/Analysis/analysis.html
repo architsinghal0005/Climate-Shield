@@ -51,25 +51,36 @@
         <main class="analysis-layout">
 
             <section class="analysis-hero">
-                <span class="eyebrow">Weather analysis workspace</span>
-                <h1>Check flood and heat risk for any location in seconds.</h1>
-                <p>
-                    Enter a city, state, and country to pull live weather data, summarize risk,
-                    and surface alerts in a clean, readable format.
-                </p>
+                <div class="analysis-hero-left">
+                    <span class="eyebrow">Weather analysis workspace</span>
+                    <h1 id="hero-typing-text"></h1>
+                    <p>
+                        Enter a city, state, and country to pull live weather data, summarize risk,
+                        and surface alerts in a clean, readable format.
+                    </p>
 
-                <div class="mini-stats">
-                    <div>
-                        <strong>Live</strong>
-                        <span>weather fetch</span>
+                    <div class="mini-stats">
+                        <div>
+                            <strong>Live</strong>
+                            <span>weather fetch</span>
+                        </div>
+                        <div>
+                            <strong>Fast</strong>
+                            <span>risk scoring</span>
+                        </div>
+                        <div>
+                            <strong>Clear</strong>
+                            <span>alert feedback</span>
+                        </div>
                     </div>
-                    <div>
-                        <strong>Fast</strong>
-                        <span>risk scoring</span>
-                    </div>
-                    <div>
-                        <strong>Clear</strong>
-                        <span>alert feedback</span>
+                </div>
+                
+                <div class="hero-right">
+                    <div class="hero-image-carousel">
+                        <img src="../images/climate_safe_city_1779740046335.png" class="carousel-img active" alt="Safe City" />
+                        <img src="../images/climate_heat_risk_1779740031488.png" class="carousel-img" alt="Heatwave Risk" />
+                        <img src="../images/climate_flood_risk_1779740015568.png" class="carousel-img" alt="Flood Risk" />
+                        <div class="carousel-overlay"></div>
                     </div>
                 </div>
             </section>
@@ -88,15 +99,15 @@
                     <div class="analysis-intro-meta">
                         <div>
                             <strong>Live fetch</strong>
-                            <span>backend weather response</span>
+                            <span>Backend weather response</span>
                         </div>
                         <div>
                             <strong>Risk view</strong>
-                            <span>flood and heat signals</span>
+                            <span>Flood and heat signals</span>
                         </div>
                         <div>
                             <strong>Alerts</strong>
-                            <span>clear output for action</span>
+                            <span>Clear output for action</span>
                         </div>
                     </div>
                 </div>
@@ -142,20 +153,25 @@
 
                 </div>
 
-                <div id="results" class="glass-card results-card hidden">
+                <div id="results" class="glass-card results-card is-visible">
 
                     <div class="results-header">
                         <div>
-                            <span class="results-kicker">Analysis complete</span>
-                            <h3 id="result-status">Ready to review location risk</h3>
+                            <span class="results-kicker">Live Data</span>
+                            <h3 id="result-status">Current Heat Scenario: India</h3>
                             <p id="result-summary">
-                                Your live weather snapshot and risk analysis will appear here after each search.
+                                Showing default live temperature trends. Enter a location to analyze specific weather risks.
                             </p>
                         </div>
 
                         <div class="status-pill" id="status-pill">
-                            Waiting for input
+                            Live Status
                         </div>
+                    </div>
+
+                    <div class="section-title">📊 7-Day Temperature Trend</div>
+                    <div class="chart-container" style="position: relative; height:30vh; width:100%; margin-bottom: 30px;">
+                        <canvas id="temperatureChart"></canvas>
                     </div>
 
                     <div class="section-title">📍 Live Weather Report</div>
@@ -249,6 +265,7 @@
 
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="analysis.js"></script>
     <script src="../chatbot.js"></script>
 

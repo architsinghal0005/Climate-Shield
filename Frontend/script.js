@@ -138,3 +138,17 @@ async function getWeatherData(){
         );
     }
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+    // Image carousel effect for index.html
+    const carouselImages = document.querySelectorAll(".home-carousel .carousel-img");
+    if (carouselImages.length > 0) {
+        let currentImageIndex = 0;
+        
+        setInterval(() => {
+            carouselImages[currentImageIndex].classList.remove("active");
+            currentImageIndex = (currentImageIndex + 1) % carouselImages.length;
+            carouselImages[currentImageIndex].classList.add("active");
+        }, 5000);
+    }
+});

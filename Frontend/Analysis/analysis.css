@@ -164,8 +164,12 @@ body::before {
 }
 
 .analysis-hero {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 40px;
+    align-items: center;
     padding: 28px 8px 0 6px;
-    max-width: 960px;
+    max-width: 1140px;
 }
 
 .eyebrow {
@@ -183,10 +187,69 @@ body::before {
 }
 
 .analysis-hero h1 {
-    font-size: clamp(2.4rem, 5vw, 4.7rem);
-    line-height: 0.98;
-    letter-spacing: -0.04em;
-    max-width: 10ch;
+    font-size: clamp(2.2rem, 4vw, 4.2rem);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    min-height: 3.3em;
+}
+
+#hero-typing-text {
+    display: block;
+}
+
+.typewriter-cursor {
+    display: inline-block;
+    width: 4px;
+    height: 1em;
+    background-color: var(--accent);
+    margin-left: 4px;
+    vertical-align: middle;
+    animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+.hero-right {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    border-radius: 28px;
+    overflow: hidden;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.hero-image-carousel {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.carousel-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out, transform 8s ease-out;
+    transform: scale(1.05);
+}
+
+.carousel-img.active {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.carousel-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(2, 6, 23, 0.8) 0%, transparent 40%);
+    pointer-events: none;
 }
 
 .analysis-hero p {
@@ -795,6 +858,17 @@ button:hover {
     .footer {
         flex-direction: column;
         align-items: flex-start;
+    }
+
+    .analysis-hero {
+        grid-template-columns: 1fr;
+    }
+    .hero-right {
+        aspect-ratio: 16 / 9;
+        margin-top: 14px;
+    }
+    #hero-typing-text {
+        min-height: auto;
     }
 
     .analysis-hero h1 {

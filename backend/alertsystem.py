@@ -538,6 +538,26 @@ def chatbot():
             ""
         ).lower()
 
+        # Try using Gemini API if key is available
+        gemini_api_key = os.environ.get("GEMINI_API_KEY")
+        if gemini_api_key:
+            try:
+                import google.generativeai as genai
+                genai.configure(api_key=gemini_api_key)
+                model = genai.GenerativeModel('gemini-1.5-flash')
+                
+                prompt = f"You are ClimateBot, a helpful AI assistant for the Climate Shield application. Please answer this user question about weather, climate, or the application accurately and concisely: {message}"
+                response = model.generate_content(prompt)
+                
+                return jsonify({
+                    "success": True,
+                    "response": response.text
+                })
+            except Exception as gemini_err:
+                print("Gemini API Error:", str(gemini_err))
+                # Fallback to static responses if Gemini fails
+
+        # Static fallback responses
         responses = {
 
             "flood":
