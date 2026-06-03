@@ -434,15 +434,10 @@ async function getWeatherData() {
 
 function clearResults() {
   document.getElementById("city").value = "";
-
   document.getElementById("state").value = "";
-
   document.getElementById("country").value = "";
-
   document.getElementById("results").classList.add("hidden");
-
   document.getElementById("alert-box").classList.add("hidden");
-
   document.getElementById("message-box").classList.add("hidden");
 }
 
@@ -473,6 +468,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
 window.useCurrentLocation = async function () {
   if (!navigator.geolocation) {
     alert("Geolocation is not supported by your browser.");
